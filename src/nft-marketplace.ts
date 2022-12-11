@@ -1,9 +1,15 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   ItemBought as ItemBoughtEvent,
   ItemCanceled as ItemCanceledEvent,
   ItemListed as ItemListedEvent,
 } from "../generated/NftMarketplace/NftMarketplace";
-import { ItemBought, ItemCanceled, ItemListed } from "../generated/schema";
+import {
+  ActiveItem,
+  ItemBought,
+  ItemCanceled,
+  ItemListed,
+} from "../generated/schema";
 
 export function handleItemBought(event: ItemBoughtEvent): void {}
 
@@ -36,4 +42,8 @@ export function handleItemListed(event: ItemListedEvent): void {
   entity.transactionHash = event.transaction.hash;
 
   entity.save();
+}
+
+function getIdfromEventParams(tokenId: BigInt, nftaddress: Address): string {
+  return tokenId.toHexString;
 }
